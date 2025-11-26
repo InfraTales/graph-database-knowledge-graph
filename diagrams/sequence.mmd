@@ -1,0 +1,15 @@
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant API as API Gateway
+    participant Lambda as Query Lambda
+    participant Neptune as Neptune
+
+    App->>API: Graph query request
+    API->>Lambda: Invoke function
+    Lambda->>Neptune: Execute Gremlin/SPARQL
+    Neptune->>Neptune: Traverse graph
+    Neptune-->>Lambda: Return results
+    Lambda-->>API: Format response
+    API-->>App: JSON results
+```

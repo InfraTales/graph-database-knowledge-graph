@@ -1,0 +1,33 @@
+```mermaid
+graph LR
+    subgraph Ingest["Data Ingestion"]
+        Batch[Batch Load]
+        Stream[Stream Updates]
+    end
+
+    subgraph Transform["Transform"]
+        Model[Graph Modeling]
+        Enrich[Entity Resolution]
+    end
+
+    subgraph Store["Graph Store"]
+        Vertices[Vertices]
+        Edges[Edges]
+        Properties[Properties]
+    end
+
+    subgraph Query["Query Patterns"]
+        Traversal[Graph Traversal]
+        Pattern[Pattern Matching]
+        Algorithm[Graph Algorithms]
+    end
+
+    Batch --> Model
+    Stream --> Model
+    Model --> Enrich
+    Enrich --> Vertices
+    Enrich --> Edges
+    Vertices --> Traversal
+    Edges --> Pattern
+    Properties --> Algorithm
+```

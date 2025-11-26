@@ -1,0 +1,37 @@
+```mermaid
+graph TD
+    subgraph Apps["Applications"]
+        Fraud[Fraud Detection]
+        Recommend[Recommendations]
+        Search[Entity Search]
+    end
+
+    subgraph API["API Layer"]
+        APIGW[API Gateway]
+        Lambda[Query Lambda]
+    end
+
+    subgraph Neptune["Neptune Cluster"]
+        Writer[Writer Instance]
+        Reader1[Reader 1]
+        Reader2[Reader 2]
+    end
+
+    subgraph Data["Data Sources"]
+        S3[S3 Bulk Load]
+        Stream[Kinesis Stream]
+        ETL[Glue ETL]
+    end
+
+    Fraud --> APIGW
+    Recommend --> APIGW
+    Search --> APIGW
+    APIGW --> Lambda
+    Lambda --> Reader1
+    Lambda --> Reader2
+    S3 --> Writer
+    Stream --> ETL
+    ETL --> Writer
+    Writer --> Reader1
+    Writer --> Reader2
+```
